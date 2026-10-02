@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LondonVista / Jacob</title>
+<meta name="description" content="Jacob (LondonVista) builds small, real tools with AI coding agents: Mac and desktop utilities and Grok Bot templates." />
+<meta name="theme-color" content="#0c0d10" />
+<style>
+  :root {
+    --bg: #0c0d10;
+    --bg-elev: #14161c;
+    --fg: #e8e9ed;
+    --muted: #9a9eab;
+    --dim: #6b7080;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #8ab4ff;
+    --accent-soft: rgba(138, 180, 255, 0.12);
+    --accent-line: rgba(138, 180, 255, 0.22);
+    --glass: rgba(255, 255, 255, 0.04);
+    --radius: 14px;
+    --max: 800px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f6f8;
+      --bg-elev: #ffffff;
+      --fg: #16181d;
+      --muted: #4d5260;
+      --dim: #6b7080;
+      --border: rgba(0, 0, 0, 0.09);
+      --accent: #1f5fd1;
+      --accent-soft: rgba(31, 95, 209, 0.08);
+      --accent-line: rgba(31, 95, 209, 0.2);
+      --glass: rgba(0, 0, 0, 0.015);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 3rem 1rem 4rem; }
+
+  header.hero { margin-bottom: 2.75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .eyebrow, .section-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 0 0 0.85rem;
+  }
+  h1 {
+    font-size: clamp(1.65rem, 4vw, 2.05rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 0.35rem;
+  }
+  .handle { color: var(--muted); font-weight: 500; margin: 0 0 1.15rem; }
+  .lede { color: var(--muted); max-width: 54ch; margin: 0 0 1rem; }
+  .hire { max-width: 54ch; margin: 0; font-size: 1rem; }
+
+  .cards { display: flex; flex-direction: column; gap: 1.15rem; margin-bottom: 3rem; }
+
+  article.card {
+    background: linear-gradient(165deg, var(--glass), transparent 55%), var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.35rem 1.4rem 1.45rem;
+  }
+  article.card h2 { font-size: 1.2rem; font-weight: 650; letter-spacing: -0.015em; margin: 0 0 0.85rem; }
+
+  .flag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    margin: 0 0 0.65rem;
+  }
+
+  .meta { margin: 0 0 0.65rem; }
+  .meta dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 0.7rem 0 0.2rem;
+  }
+  .meta dt:first-child { margin-top: 0; }
+  .meta dd { margin: 0; color: var(--muted); }
+  .meta dd strong { color: var(--fg); font-weight: 560; }
+
+  figure.shot { margin: 1rem 0 0.25rem; }
+  figure.shot img, figure.shot video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  figure.shot figcaption { font-size: 0.85rem; color: var(--dim); margin-top: 0.4rem; }
+  .clips { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .clips figure.shot { margin: 1rem 0 0; }
+
+  .links {
+    list-style: none;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1rem;
+    font-size: 0.95rem;
+  }
+  .pending { color: var(--dim); font-size: 0.95rem; }
+
+  .note {
+    margin: 0.9rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+
+  footer.contact { padding-top: 1.75rem; border-top: 1px solid var(--border); }
+  footer.contact h2 {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dim);
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  footer.contact p { margin: 0; color: var(--muted); }
+  footer.contact .sep { color: var(--dim); margin: 0 0.35rem; }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 2rem 1rem 3rem; }
+    article.card { padding: 1.15rem 1.1rem 1.25rem; }
+    .clips { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    a { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Portfolio</p>
+      <h1>LondonVista / Jacob</h1>
+      <p class="handle">Product builder · London</p>
+      <p class="lede">
+        I build small, real tools with AI coding agents: Claude Code, Grok Build and Antigravity on the command line,
+        and Grok Bot. Desktop widgets, local utilities and bots that solve one clear problem and stay out of the way.
+      </p>
+      <p class="hire">
+        Open to product-builder and AI-adjacent roles, freelance tools, and helping small businesses start using AI tools to save time.
+      </p>
+    </header>
+
+    <p class="section-label" id="shipped">Shipped</p>
+
+    <section class="cards" aria-labelledby="shipped">
+
+      <article class="card">
+        <span class="flag">Flagship</span>
+        <h2>BigUwidget</h2>
+        <dl class="meta">
+          <dt>Problem</dt>
+          <dd>AI quota and usage across Grok, Grok Bot, Antigravity, Claude and ChatGPT is hard to see at a glance.</dd>
+          <dt>Shipped</dt>
+          <dd>
+            Always-on-top usage and quota widget for <strong>Mac</strong> (native Swift, primary),
+            <strong>Linux</strong> and <strong>Windows</strong> (Electron; Windows is experimental).
+            Cards for Grok, Grok Bot, Antigravity (Gemini, Claude and GPT), Claude Pro/Max and ChatGPT.
+            No server and no telemetry.
+          </dd>
+        </dl>
+        <figure class="shot">
+          <img src="media/biguwidget.jpg" width="1002" height="858" alt="BigUwidget quota cards on macOS" loading="lazy" />
+        </figure>
+        <ul class="links">
+          <li><a href="https://github.com/LondonVista/biguwidget">GitHub</a></li>
+          <li><a href="https://birch-juniper-cinder-stone.grok.me">Site</a></li>
+          <li><a href="https://github.com/LondonVista/biguwidget/releases/latest">Latest release</a></li>
+        </ul>
+        <p class="note">
+          Mac first, then Linux and Windows. Update prompts come from GitHub releases.
+          Also available as a Grok Bot template (below).
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>iPhone Battery Widget</h2>
+        <dl class="meta">
+          <dt>Problem</dt>
+          <dd>Mac users want a clear view of iPhone and MacBook battery, temperature and wear without digging through Settings.</dd>
+          <dt>Shipped</dt>
+          <dd>Translucent floating macOS widget and dashboard for MacBooks, iPhones and iPads, with live temperature and a battery health history.</dd>
+        </dl>
+        <figure class="shot">
+          <img src="media/battery.jpg" width="484" height="720" alt="iPhone Battery Widget floating on the desktop" loading="lazy" style="max-width:240px" />
+        </figure>
+        <ul class="links">
+          <li><a href="https://github.com/LondonVista/iPhoneBatteryWidget">GitHub</a></li>
+          <li><a href="https://timber-gem-fjord-cobalt.grok.me">Site</a></li>
+          <li><a href="https://github.com/LondonVista/iPhoneBatteryWidget/releases/latest">Latest release</a></li>
+        </ul>
+        <p class="note">Released often; recent versions added live Mac temperature and a correct iPhone battery percentage.</p>
+      </article>
+
+      <article class="card">
+        <h2>Mac bandwidth / buy compare</h2>
+        <dl class="meta">
+          <dt>Problem</dt>
+          <dd>Comparing Apple Silicon RAM bandwidth against price, config and finance options for Air, Pro, mini and Studio is messy.</dd>
+          <dt>Built</dt>
+          <dd>
+            Local static tool: Apple Silicon RAM bandwidth, configs, GBP/USD, eBay pristine pricing,
+            release calendar, and a UK Creation / PayPal monthly budget with loan cost.
+          </dd>
+        </dl>
+        <p class="pending">Not published yet. Live link when it is.</p>
+      </article>
+
+    </section>
+
+    <p class="section-label" id="bots">Grok Bot templates</p>
+
+    <section class="cards" aria-labelledby="bots">
+
+      <article class="card">
+        <h2>Weekly Usage</h2>
+        <dl class="meta">
+          <dt>What it does</dt>
+          <dd>
+            Installs the Linux BigUwidget on your Grok Bot computer, so you can see what is left of the week's
+            Grok Bot usage without digging through settings. Optional cards for Grok, AGY and ChatGPT;
+            can also install the widget on Mac or Windows.
+          </dd>
+        </dl>
+        <ul class="links">
+          <li><a href="https://x.ai/bot/TEWOTNV18AmN4GtqjtUSv">Try the template</a></li>
+          <li><a href="https://x.com/London_Vista/status/2100689107806818537">Announcement on X</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Video editor</h2>
+        <dl class="meta">
+          <dt>What it does</dt>
+          <dd>
+            Send a link or a file. It downloads the video, trims it to the part you want and writes the caption script
+            for you to check. When you say burn, it adds captions phrase by phrase with the active word highlighted
+            in your colour, then puts the finished file on Google Drive so you can watch it on your phone.
+          </dd>
+        </dl>
+        <div class="clips">
+          <figure class="shot">
+            <video src="media/clip-captions.mp4" poster="media/clip-captions.jpg" controls muted playsinline preload="none" width="886" height="498"></video>
+            <figcaption>Podcast clip with word-highlight captions</figcaption>
+          </figure>
+          <figure class="shot">
+            <video src="media/clip-launch.mp4" poster="media/clip-launch.jpg" controls muted playsinline preload="none" width="1280" height="720"></video>
+            <figcaption>Trimmed from a 4K Starship launch stream</figcaption>
+          </figure>
+        </div>
+        <ul class="links">
+          <li><a href="https://x.ai/bot/7xlXwKtAilGUrtvfM8tHL">Try the template</a></li>
+        </ul>
+        <p class="note">10-second excerpts. I use it often to cut short clips from long videos.</p>
+      </article>
+
+    </section>
+
+    <footer class="contact">
+      <h2>Contact</h2>
+      <p>
+        <a href="mailto:londonvista@icloud.com">londonvista@icloud.com</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://x.com/London_Vista">X @London_Vista</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://github.com/LondonVista">GitHub</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://ko-fi.com/london_vista">Ko-fi</a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
